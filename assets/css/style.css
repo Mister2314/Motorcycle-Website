@@ -462,7 +462,7 @@ footer{
     color: #ffffff;
     letter-spacing: 0.15em;
 }
-.slider{
+.slider {
     width: 59px;
     height: 59px;
     background-color: red;
@@ -471,7 +471,20 @@ footer{
     position: fixed;
     cursor: pointer;
     border-radius: 2px;
-    transition: height .2s ease;
+    transition: all 0.3s ease-in-out;
+    opacity: 0; 
+}
+
+.slider.visible {
+    opacity: 1; 
+}
+
+.slider:hover{
+    background-color: transparent;
+    border:1px solid red;
+}
+.slider:hover i{
+    color: red;
 }
 
 .slider i{
