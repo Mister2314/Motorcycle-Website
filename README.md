@@ -1,23 +1,38 @@
-# Grand Prix — Motorcycle Store
+<h1 align="center">Grand Prix — Motorcycle Store</h1>
 
-**A motorcycle shop landing page with a nine-item product grid and bold editorial styling.**
+<p align="center"><b>A motorcycle shop landing page with a nine-item product grid and bold editorial styling.</b></p>
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-mister2314.github.io/Motorcycle--Website-2ea44f?style=flat-square&logo=vercel&logoColor=white)](https://mister2314.github.io/Motorcycle-Website/)
+<p align="center">
+[![Live Demo](https://img.shields.io/badge/Live_Demo-▶-2ea44f?style=for-the-badge&logo=vercel&logoColor=white)](https://mister2314.github.io/Motorcycle-Website/)
 ![HTML5](https://img.shields.io/badge/HTML5-e34f26?style=flat-square&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572b6?style=flat-square&logoColor=white)
 ![Vanilla JS](https://img.shields.io/badge/Vanilla_JS-f7df1e?style=flat-square&logoColor=white)
+</p>
+
+<p align="center">[**Live demo**](https://mister2314.github.io/Motorcycle-Website/) · [Quick start](#quick-start) · [Features](#features) · [Architecture](#architecture) · [FAQ](#faq)</p>
 
 <p align="center">
   <a href="https://mister2314.github.io/Motorcycle-Website/">
-    <img src="docs/preview.png" alt="Grand Prix — Motorcycle Store — desktop preview" width="100%">
+    <img src="docs/demo.gif" alt="Grand Prix — Motorcycle Store — animated demo" width="88%">
   </a>
 </p>
+
+<p align="center"><sub>Live capture of the real build — 2208 KB, loops forever.</sub></p>
 
 ## Overview
 
 A storefront landing page for a motorcycle brand. The centrepiece is a nine-tile product grid, supported by a title area, brand imagery and a footer built from the same visual language.
 
 Typography does most of the work here — condensed display faces against a dark palette — and the layout is CSS grid from top to bottom.
+
+## At a glance
+
+| Field | Detail |
+| --- | --- |
+| **Type** | Static site — no build step |
+| **Primary language** | CSS |
+| **Live demo** | [mister2314.github.io/Motorcycle-Website](https://mister2314.github.io/Motorcycle-Website/) |
+| **Repository** | [Mister2314/Motorcycle-Website](https://github.com/Mister2314/Motorcycle-Website) |
 
 ## Features
 
@@ -38,25 +53,30 @@ Typography does most of the work here — condensed display faces against a dark
 | Logic | Vanilla JavaScript |
 | Deploy | GitHub Pages |
 
+## Architecture
+
+```mermaid
+flowchart LR
+  A["Browser"] --> B["Markup<br/>HTML5"] --> C["Styling<br/>CSS3 (grid"] --> D["Icons<br/>Iconify"] --> E["Logic<br/>Vanilla JavaScript"] --> F["Deploy"]
+```
+
 ## Screenshots
 
 | Desktop | Mobile |
 | :---: | :---: |
 | <img src="docs/preview.png" alt="Desktop view"> | <img src="docs/preview-mobile.png" alt="Mobile view" width="230"> |
 
-## Getting Started
-
-No build step and no dependencies — clone the repo and open the entry file, or serve the folder locally:
+## Quick Start
 
 ```bash
 git clone https://github.com/Mister2314/Motorcycle-Website.git
 cd Motorcycle-Website
 
-# Option 1 — open it directly
+# open it directly
 start index.html      # Windows
 open  index.html      # macOS
 
-# Option 2 — serve it locally
+# or serve the folder
 npx serve .
 ```
 
