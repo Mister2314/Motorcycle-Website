@@ -3,13 +3,13 @@
 <p align="center"><b>A motorcycle shop landing page with a nine-item product grid and bold editorial styling.</b></p>
 
 <p align="center">
-[![Live Demo](https://img.shields.io/badge/Live_Demo-▶-2ea44f?style=for-the-badge&logo=vercel&logoColor=white)](https://mister2314.github.io/Motorcycle-Website/)
-![HTML5](https://img.shields.io/badge/HTML5-e34f26?style=flat-square&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572b6?style=flat-square&logoColor=white)
-![Vanilla JS](https://img.shields.io/badge/Vanilla_JS-f7df1e?style=flat-square&logoColor=white)
+<a href="https://mister2314.github.io/Motorcycle-Website/"><img src="https://img.shields.io/badge/Live_Demo-2ea44f?style=flat-square&logo=vercel&logoColor=white" alt="Live demo" height="28"></a>
+<img src="https://img.shields.io/badge/HTML5-e34f26?style=flat-square" alt="HTML5" height="20">
+<img src="https://img.shields.io/badge/CSS3-1572b6?style=flat-square" alt="CSS3" height="20">
+<img src="https://img.shields.io/badge/Vanilla_JS-f7df1e?style=flat-square" alt="Vanilla JS" height="20">
 </p>
 
-<p align="center">[**Live demo**](https://mister2314.github.io/Motorcycle-Website/) · [Quick start](#quick-start) · [Features](#features) · [Architecture](#architecture) · [FAQ](#faq)</p>
+<p align="center"><a href="https://mister2314.github.io/Motorcycle-Website/"><b>Live demo</b></a> &nbsp;·&nbsp; <a href="#quick-start">Quick start</a> &nbsp;·&nbsp; <a href="#features">Features</a> &nbsp;·&nbsp; <a href="#architecture">Architecture</a> &nbsp;·&nbsp; <a href="#faq">FAQ</a></p>
 
 <p align="center">
   <a href="https://mister2314.github.io/Motorcycle-Website/">
@@ -88,6 +88,35 @@ assets/css/style.css — grid, typography and hover states
 assets/js/index.js — page behaviour
 assets/img/ — product and brand imagery
 ```
+
+## FAQ
+
+<details>
+<summary><b>What was the hardest part?</b></summary>
+
+Keeping a nine-tile product grid even at every breakpoint. A grid that looks right at 1440 px usually collapses badly at 768 px, so the tile ratio is set rather than the column width.
+
+</details>
+
+<details>
+<summary><b>Why three typefaces?</b></summary>
+
+One condensed display face, one for body copy and one for numerals. That is the ceiling — a fourth would start to read as noise.
+
+</details>
+
+<details>
+<summary><b>Is the grid dynamic?</b></summary>
+
+No. The tiles are static markup. A real store would drive them from data, which is what the Pawsoome project does.
+
+</details>
+
+## Roadmap
+
+- [ ] Move the tiles to a data array and render them
+- [ ] Add real product pages
+- [ ] Compress the product imagery
 
 ## Author
 
