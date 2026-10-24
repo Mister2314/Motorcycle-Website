@@ -1,8 +1,8 @@
-﻿# Motorcycle-Website
+# Motorcycle-Website
 
 "Grand Prix" — a motorcycle store landing page with a nine-item product grid and dark editorial styling.
 
-**Live demo:** <https://mister2314.github.io/Motorcycle-Website/>
+**Live demo:** <https://motorcycle-website.vercel.app/>
 
 <p align="center">
 <div align="center">
@@ -20,7 +20,7 @@ A storefront landing page: hero title area, a nine-tile product grid, brand imag
 
 ## Tech stack
 
-HTML5 · CSS3 (Grid, custom properties) · Vanilla JS · Iconify, Font Awesome 6
+React 19 · TypeScript · Vite
 
 ## Features
 
