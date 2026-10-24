@@ -1,6 +1,6 @@
 # Motorcycle-Website
 
-"Grand Prix" — a motorcycle store landing page with a nine-item product grid and dark editorial styling.
+"Grand Prix" — a motorcycle store landing page rebuilt as an industrial catalogue: nine spec'd tiles, fluid display typography and a red machine-stamp accent on a white field.
 
 **Live demo:** <https://motorcycle-website.vercel.app/>
 
@@ -25,26 +25,37 @@
 
 ## What it does
 
-A storefront landing page: hero title area, a nine-tile product grid, brand imagery and a footer sharing one visual language. Typography carries the design — condensed display faces (Rajdhani, Ubuntu, Heebo) against a dark palette. The grid is CSS Grid top to bottom and reflows to a single column on mobile. A small vanilla-JS script handles the scroll-to-top button.
+A storefront landing page: hero title area, a nine-tile catalogue grid, brand imagery and a footer sharing one visual language. The revamp treats each tile like a catalogue entry — an index plate (01–09), a ruled image frame, letterspaced metadata and a hover choreography that zooms the image, blooms a red duotone stamp and slides up a spec strip. Typography carries the design: Rajdhani condensed caps for display, Heebo for letterspaced meta, Ubuntu for body — all on a fluid `clamp()` scale.
+
+The grid is CSS Grid top to bottom and reflows to a single full-bleed column on mobile. Scroll reveals are once-only with a 70 ms row rhythm, driven by one IntersectionObserver. No animation library — every transition is CSS on `transform`/`opacity`.
 
 ## Tech stack
 
-React 19 · TypeScript · Vite
+React 19 · TypeScript · Vite · zero runtime animation dependencies
 
 ## Features
 
-- Nine-tile product grid with hover states, fixed tile ratio across breakpoints
-- Condensed display typography: three typefaces with distinct roles
-- Grid reflows to one column on mobile
-- Scroll-to-top button that appears past 100 px of scroll
-- Multi-size favicon and Apple touch icons
+- Nine-tile catalogue grid: index plates, ruled frames, spec strips on hover
+- Tile choreography — image zoom (1.06), red duotone stamp (`mix-blend-mode: multiply`), title underline sweep, press feedback (0.98 scale)
+- Fluid typographic scale via `clamp()`: hero 44→96 px, tile titles 20→26 px
+- Sticky header that condenses to a 56 px bar past 100 px of scroll
+- Once-only scroll reveals with per-row 70 ms stagger (IntersectionObserver)
+- Scroll-to-top as a real `<button>` with `aria-label`, appears past 100 px
+- Keyboard access throughout: skip link, `focus-visible` outlines, tiles as links
+- Mobile-specific composition: full-bleed 4:5 tiles, folio caption rows, hover affordances replaced with tap feedback
+- Reduced-motion honored: reveals render instantly, hover zoom falls back to opacity-only cues
+- Lazy-loaded grid images (`loading="lazy"`, `decoding="async"`)
 
 ## Run locally
 
 ```bash
 git clone https://github.com/Mister2314/Motorcycle-Website.git
 cd Motorcycle-Website
-npx serve .   # or just open index.html
+npm install
+npm run dev
 ```
 
-Limitation: the tiles are static markup — a real store would render them from a data array.
+## Notes
+
+- Tiles render from a data array in `src/App.tsx`; tile images map to alt text in `src/components/BoxSection.tsx`.
+- `git tag pre-revamp-motorcycle` holds the pre-revamp design for comparison.

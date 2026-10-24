@@ -1,28 +1,28 @@
 /*
- * Minimal replica of AOS 2.3.1 (CDN) for the three animation types this
- * site uses: fade-up, fade-right, zoom-out. Defaults: 400ms ease, no
- * delay, re-animates every time the element leaves the viewport (once=false),
- * 120px bottom offset — matching `AOS.init()` with no options.
+ * Once-only scroll reveals. [data-reveal] elements start hidden, rise 24px
+ * and fade in over 0.6s with an expo-out curve; per-element
+ * `data-reveal-delay` staggers rows in rhythm (0 / 70 / 140ms).
+ * Under prefers-reduced-motion everything renders instantly.
  */
-[data-aos] {
-  transition-property: opacity, transform;
-  transition-duration: 0.4s;
-  transition-timing-function: ease;
+[data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+  transition:
+    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   transition-delay: 0s;
+  will-change: opacity, transform;
 }
-[data-aos="fade-up"] {
-  opacity: 0;
-  transform: translate3d(0, 100px, 0);
-}
-[data-aos="fade-right"] {
-  opacity: 0;
-  transform: translate3d(-100px, 0, 0);
-}
-[data-aos="zoom-out"] {
-  opacity: 0;
-  transform: scale3d(1.2, 1.2, 1.2);
-}
-[data-aos].aos-animate {
+
+[data-reveal].is-revealed {
   opacity: 1;
-  transform: translateZ(0);
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
