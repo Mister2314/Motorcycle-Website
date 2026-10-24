@@ -2,7 +2,7 @@
 
 "Grand Prix" — a motorcycle store landing page rebuilt as an industrial catalogue: nine spec'd tiles, fluid display typography and a red machine-stamp accent on a white field.
 
-**Live demo:** <https://motorcycle-website.vercel.app/>
+**Live demo:** <https://motorcycle-website-morpheus2314s-projects.vercel.app/>
 
 <div align="center">
 
