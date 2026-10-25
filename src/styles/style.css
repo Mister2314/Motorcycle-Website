@@ -9,13 +9,31 @@
   --ink: #0d0d0d;
   --paper: #ffffff;
   --red: #d40000;
+  --red-text: #d40000;
   --rule: #e5e5e5;
   --meta-grey: #9c9c9c;
   --body-grey: #808080;
+  --surface: #ffffff;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --dur-hover: 0.45s;
   --dur-press: 0.15s;
   --dur-micro: 0.2s;
+}
+
+/* ---------- Dark theme — designed, not inverted ---------- */
+[data-theme="dark"] {
+  --ink: #eceae6;
+  --paper: #101113;
+  --red: #e01111;
+  --red-text: #ff5a5a;
+  --rule: #2b2c2f;
+  --meta-grey: #8f8f8f;
+  --body-grey: #a5a5a5;
+  --surface: #17181b;
+  color-scheme: dark;
+}
+:root {
+  color-scheme: light;
 }
 
 * {
@@ -270,12 +288,31 @@ ul {
   flex-direction: column;
   justify-content: center;
 }
+.hero {
+  position: relative;
+}
+.hero::before {
+  /* readable scrim so title stays legible in both themes */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.25));
+  pointer-events: none;
+}
+[data-theme="dark"] .hero::before {
+  background: linear-gradient(180deg, rgba(16, 17, 19, 0.78), rgba(16, 17, 19, 0.3));
+}
+.hero-text {
+  position: relative;
+  z-index: 1;
+}
+
 .hero-text h6 {
   font-family: "Heebo", sans-serif;
   font-weight: 500;
   letter-spacing: 0.8em;
   font-size: 14px;
-  color: var(--red);
+  color: var(--red-text);
   display: inline-block;
   margin-bottom: 10px;
 }
@@ -421,7 +458,7 @@ ul {
   letter-spacing: 0.15em;
   font-weight: 500;
   font-size: 11px;
-  color: var(--red);
+  color: var(--red-text);
 }
 .box h4 {
   color: var(--ink);
@@ -652,6 +689,598 @@ footer > div {
   color: var(--body-grey);
 }
 
+/* ---------- Scroll progress bar ---------- */
+.scroll-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--red);
+  transform-origin: left center;
+  transform: scaleX(0);
+  z-index: 101;
+}
+
+/* ---------- Nav links (real anchors now) ---------- */
+.navigation li a {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.navigation li:hover a,
+.navigation li:focus-visible a {
+  color: var(--ink);
+}
+.navigation li:focus-within {
+  outline: 2px solid var(--red);
+  outline-offset: -2px;
+}
+
+/* ---------- Theme toggle ---------- */
+.theme-toggle {
+  background: none;
+  border: 1px solid #eeeeee;
+  border-radius: 2px;
+  padding: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  min-width: 44px;
+  min-height: 44px;
+  justify-content: center;
+}
+.theme-toggle-track {
+  width: 34px;
+  height: 18px;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.25);
+  position: relative;
+  transition: background var(--dur-micro);
+}
+.theme-toggle-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform var(--dur-micro) var(--ease-out);
+}
+.theme-toggle[aria-pressed="true"] .theme-toggle-thumb {
+  transform: translateX(16px);
+  background: var(--red);
+}
+.theme-toggle[aria-pressed="true"] .theme-toggle-track {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+/* ---------- Hero sub + CTA ---------- */
+.hero-sub {
+  margin-top: 28px;
+  max-width: 480px;
+  font-size: clamp(15px, 1.4vw, 18px);
+  line-height: 1.6;
+  color: var(--ink);
+}
+.hero-cta {
+  display: inline-block;
+  margin-top: 22px;
+  padding: 14px 26px;
+  background: var(--red);
+  color: #fff;
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-decoration: none;
+  border-radius: 2px;
+  min-height: 44px;
+  line-height: 1.2;
+  transition: background var(--dur-micro), transform var(--dur-press) ease;
+}
+.hero-cta:hover {
+  background: var(--ink);
+}
+.hero-cta:active {
+  transform: scale(0.98);
+}
+
+/* ---------- Expand hint on catalogue tiles ---------- */
+.expand-hint {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 4px 10px;
+  background: var(--red);
+  color: #fff;
+  font-family: "Heebo", sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity var(--dur-hover) var(--ease-out), transform var(--dur-hover) var(--ease-out);
+  pointer-events: none;
+}
+.box:hover .expand-hint,
+.box:focus-visible .expand-hint {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* box is a real button now */
+button.box {
+  appearance: none;
+  background: none;
+  border: none;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  padding: 0;
+}
+
+/* ---------- Visually hidden ---------- */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Lightbox ---------- */
+.lightbox {
+  border: none;
+  padding: 0;
+  background: transparent;
+  max-width: min(920px, 94vw);
+  width: 100%;
+}
+.lightbox::backdrop {
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(2px);
+}
+.lightbox-inner {
+  background: var(--surface);
+  border-top: 3px solid var(--red);
+  padding: 18px 22px 22px;
+  color: var(--ink);
+}
+.lightbox-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.lightbox-count {
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--red-text);
+}
+.lightbox-close,
+.lightbox-nav button {
+  background: none;
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background var(--dur-micro), color var(--dur-micro), border-color var(--dur-micro);
+}
+.lightbox-close:hover,
+.lightbox-nav button:hover {
+  background: var(--red);
+  border-color: var(--red);
+  color: #fff;
+}
+.lightbox img {
+  width: 100%;
+  max-height: 62vh;
+  object-fit: contain;
+  background: #000;
+  display: block;
+}
+.lightbox-caption {
+  margin-top: 16px;
+}
+.lightbox-kicker {
+  font-family: "Heebo", sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--red-text);
+}
+.lightbox-caption h3 {
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 700;
+  font-size: clamp(20px, 2.4vw, 28px);
+  letter-spacing: 0.02em;
+  margin-top: 4px;
+}
+.lightbox-nav {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+.lightbox-hint {
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--body-grey);
+}
+
+/* ============================================================
+   SHOWROOM — configurator + spec comparison
+   ============================================================ */
+.showroom,
+.book-ride {
+  width: 100%;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+  padding: 90px 40px;
+}
+.showroom-inner,
+.book-inner {
+  width: min(1280px, 100%);
+  margin: 0 auto;
+}
+.showroom-header h2,
+.book-ride h2 {
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 700;
+  font-size: clamp(30px, 3.6vw, 48px);
+  letter-spacing: 0.03em;
+  position: relative;
+  width: fit-content;
+}
+.showroom-header h2::after,
+.book-ride h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 56px;
+  height: 4px;
+  background: var(--red);
+}
+.showroom-lead {
+  margin-top: 26px;
+  color: var(--body-grey);
+  font-size: 16px;
+  max-width: 560px;
+  line-height: 1.6;
+}
+
+.configurator {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 40px;
+  align-items: start;
+}
+.bike-preview {
+  border-top: 2px solid var(--ink);
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  transition: filter var(--dur-hover) var(--ease-out);
+}
+.bike-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.colour-swatch-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+}
+.swatch {
+  width: 44px;
+  height: 44px;
+  border-radius: 2px;
+  border: 1px solid var(--rule);
+  background: var(--surface);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color var(--dur-micro);
+}
+.swatch-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid #d9d9d9;
+}
+.swatch[role="radio"][aria-checked="true"] {
+  border-color: var(--red);
+  outline: 1px solid var(--red);
+  outline-offset: 2px;
+}
+
+.config-panel {
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--red);
+  padding: 26px;
+  background: var(--surface);
+}
+.config-section {
+  border: none;
+  padding: 0 0 18px;
+  margin: 0 0 18px;
+  border-bottom: 1px solid var(--rule);
+}
+.config-section:last-of-type {
+  border-bottom: none;
+}
+.config-section legend,
+.config-section .config-section-label {
+  font-family: "Heebo", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--meta-grey);
+  text-transform: uppercase;
+  padding: 0;
+  margin-bottom: 10px;
+}
+.config-value {
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: 0.03em;
+  color: var(--ink);
+}
+.addon-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.addon-list label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  cursor: pointer;
+  font-size: 15px;
+  color: var(--ink);
+}
+.addon-list input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--red);
+  cursor: pointer;
+}
+.addon-price {
+  margin-left: auto;
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 600;
+  color: var(--body-grey);
+}
+.build-sheet {
+  margin-top: 18px;
+}
+.build-sheet dl {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px 16px;
+  font-size: 15px;
+}
+.build-sheet dt {
+  color: var(--body-grey);
+}
+.build-sheet dd {
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 600;
+  text-align: right;
+  color: var(--ink);
+}
+.build-sheet .total-row {
+  border-top: 1px solid var(--rule);
+  padding-top: 10px;
+  font-weight: 700;
+  color: var(--red-text);
+  font-size: 18px;
+}
+.cta-primary {
+  margin-top: 20px;
+  width: 100%;
+  padding: 14px 20px;
+  min-height: 48px;
+  background: var(--red);
+  color: #fff;
+  border: none;
+  border-radius: 2px;
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.15em;
+  cursor: pointer;
+  transition: background var(--dur-micro), transform var(--dur-press) ease;
+}
+.cta-primary:hover {
+  background: var(--ink);
+}
+.cta-primary:active {
+  transform: scale(0.98);
+}
+
+/* Spec comparison */
+.spec-compare {
+  margin-top: 80px;
+}
+.spec-compare h3 {
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 700;
+  font-size: clamp(22px, 2.4vw, 32px);
+  letter-spacing: 0.04em;
+}
+.model-tabs {
+  display: flex;
+  gap: 8px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+.model-tabs [role="tab"] {
+  padding: 10px 18px;
+  min-height: 44px;
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  color: var(--ink);
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  font-size: 14px;
+  cursor: pointer;
+  transition: border-color var(--dur-micro), background var(--dur-micro), color var(--dur-micro);
+}
+.model-tabs [role="tab"][aria-selected="true"],
+.model-tabs [role="tab"]:hover {
+  background: var(--red);
+  border-color: var(--red);
+  color: #fff;
+}
+.spec-table-wrap {
+  margin-top: 22px;
+  overflow-x: auto;
+  border: 1px solid var(--rule);
+}
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 640px;
+  font-size: 14px;
+}
+.spec-table th,
+.spec-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink);
+}
+.spec-table thead th {
+  font-family: "Heebo", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--meta-grey);
+  background: var(--surface);
+}
+.spec-table tbody th[scope="row"] {
+  font-family: "Heebo", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--body-grey);
+  white-space: nowrap;
+}
+.spec-table td.highlight {
+  background: color-mix(in srgb, var(--red) 8%, transparent);
+  box-shadow: inset 3px 0 0 var(--red);
+  font-weight: 500;
+}
+.spec-legend {
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--meta-grey);
+}
+
+/* ============================================================
+   BOOK A RIDE — form with validated a11y
+   ============================================================ */
+.book-ride form {
+  margin-top: 48px;
+  max-width: 880px;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.form-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+}
+.form-field label {
+  font-family: "Heebo", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--body-grey);
+  margin-bottom: 8px;
+}
+.form-field input,
+.form-field select,
+.form-field textarea {
+  font-family: "Ubuntu", sans-serif;
+  font-size: 15px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: 12px 14px;
+  min-height: 48px;
+  transition: border-color var(--dur-micro);
+}
+.form-field textarea {
+  min-height: 0;
+  resize: vertical;
+}
+.form-field input:hover,
+.form-field select:hover,
+.form-field textarea:hover {
+  border-color: var(--meta-grey);
+}
+.form-field input:focus-visible,
+.form-field select:focus-visible,
+.form-field textarea:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 1px;
+  border-color: var(--red);
+}
+.form-field [aria-invalid="true"] {
+  border-color: var(--red);
+}
+.field-error {
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--red-text);
+}
+.form-field input[type="date"] {
+  color-scheme: inherit;
+}
+.book-ride .cta-primary {
+  max-width: 320px;
+}
+.form-note {
+  margin-top: 14px;
+  font-size: 12px;
+  color: var(--meta-grey);
+}
+.form-success {
+  margin-top: 16px;
+  padding: 14px 16px;
+  border: 1px solid var(--red);
+  border-left: 4px solid var(--red);
+  background: color-mix(in srgb, var(--red) 6%, transparent);
+  color: var(--ink);
+  font-size: 14px;
+}
+
 /* ============================================================
    MOBILE — a separate composition, not a squeezed desktop
    ============================================================ */
@@ -663,9 +1292,34 @@ footer > div {
   .site-header.compact {
     height: 56px;
   }
-  .navigation,
   .right input {
-    display: none; /* mobile nav = logo + cart, catalogue is the page */
+    display: none; /* search has no place on the small composition */
+  }
+  /* mobile nav = scrollable anchor strip under the logo row */
+  .navigation {
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 0 16px 10px;
+  }
+  .navigation ul {
+    width: 100%;
+    height: auto;
+    padding-left: 0;
+    overflow-x: auto;
+    gap: 6px;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+  }
+  .navigation li {
+    padding: 10px 14px;
+    min-height: 44px;
+    font-size: 14px;
+    white-space: nowrap;
+    flex: 0 0 auto;
+  }
+  .site-header.compact .navigation li {
+    padding: 10px 14px;
   }
   .left {
     width: 60%;
@@ -718,6 +1372,24 @@ footer > div {
     transform: scale(1.02);
   }
 
+  .configurator {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  .showroom,
+  .book-ride {
+    padding: 56px 16px;
+  }
+  .hero-cta {
+    width: 100%;
+    text-align: center;
+  }
+  .spec-legend {
+    font-size: 11px;
+  }
   footer {
     padding: 48px 20px 40px;
     gap: 32px;
@@ -756,5 +1428,23 @@ footer > div {
   }
   .spec-strip {
     transform: none; /* always visible instead of sliding */
+  }
+  .expand-hint,
+  .scroll-progress {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- Reduced motion: new components ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .bike-preview,
+  .swatch,
+  .model-tabs [role="tab"],
+  .cta-primary,
+  .hero-cta,
+  .theme-toggle-thumb,
+  .lightbox-close,
+  .lightbox-nav button {
+    transition-duration: 0.01ms !important;
   }
 }

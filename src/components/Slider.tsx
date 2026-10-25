@@ -24,7 +24,9 @@ export default function Slider() {
       aria-hidden={!visible}
       tabIndex={visible ? 0 : -1}
     >
-      <i className="fa-solid fa-play fa-rotate-270" aria-hidden="true" />
+      <svg viewBox="0 0 24 24" width="12" height="12" aria-hidden="true" focusable="false">
+        <path d="M4 12h14M12 6l6 6-6 6" stroke="currentColor" strokeWidth="2.5" fill="none" />
+      </svg>
     </button>
   );
 }

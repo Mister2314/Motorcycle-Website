@@ -23,11 +23,11 @@ export default function Footer() {
       </div>
       <div className="box2">
         <span data-reveal>OUR SERVICES</span>
-        <p data-reveal>Chemical Engineering Projects</p>
-        <p data-reveal>Mining Engineering</p>
-        <p data-reveal>Construction Engineering</p>
-        <p data-reveal>Welding Engineering</p>
-        <p data-reveal>Space Program XYZ</p>
+        <p data-reveal>Scheduled Service & Diagnostics</p>
+        <p data-reveal>Tyre Fitting & Balancing</p>
+        <p data-reveal>Suspension Setup</p>
+        <p data-reveal>Crash Repair & Insurance</p>
+        <p data-reveal>Track-Day Prep</p>
       </div>
       <div className="box3">
         <span data-reveal>OFFICE IN NEW YORK</span>

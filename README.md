@@ -25,7 +25,7 @@
 
 ## What it does
 
-A storefront landing page: hero title area, a nine-tile catalogue grid, brand imagery and a footer sharing one visual language. The revamp treats each tile like a catalogue entry — an index plate (01–09), a ruled image frame, letterspaced metadata and a hover choreography that zooms the image, blooms a red duotone stamp and slides up a spec strip. Typography carries the design: Rajdhani condensed caps for display, Heebo for letterspaced meta, Ubuntu for body — all on a fluid `clamp()` scale.
+A motorcycle showroom page: hero, a nine-tile catalogue gallery with a lightbox, a showroom configurator with a live build sheet and spec comparison, a validated test-ride booking form, and a footer — all sharing one visual language. The design treats every element like a catalogue entry: index plates, ruled frames, letterspaced metadata and a red machine-stamp accent. Typography carries it: Rajdhani condensed caps for display, Heebo for letterspaced meta, Ubuntu for body — all on a fluid `clamp()` scale.
 
 The grid is CSS Grid top to bottom and reflows to a single full-bleed column on mobile. Scroll reveals are once-only with a 70 ms row rhythm, driven by one IntersectionObserver. No animation library — every transition is CSS on `transform`/`opacity`.
 
@@ -36,15 +36,21 @@ React 19 · TypeScript · Vite · zero runtime animation dependencies
 ## Features
 
 - Nine-tile catalogue grid: index plates, ruled frames, spec strips on hover
-- Tile choreography — image zoom (1.06), red duotone stamp (`mix-blend-mode: multiply`), title underline sweep, press feedback (0.98 scale)
-- Fluid typographic scale via `clamp()`: hero 44→96 px, tile titles 20→26 px
-- Sticky header that condenses to a 56 px bar past 100 px of scroll
+- **Lightbox gallery** — native `<dialog>` with focus containment, Arrow-key navigation, Escape close and focus return to the triggering tile
+- **Showroom configurator** — three colourways (CSS-filter duotone) + accessory checkboxes feeding a live build sheet with running total
+- **Spec comparison** — three models, ten rows, side-by-side table with the selected model highlighted; horizontally scrollable on mobile
+- **Book-a-ride form** — client-side validation with `aria-invalid`, `role="alert"` messages, focus-to-first-error, past-date and closed-Sunday rules
+- Dark/light theme: system default, persisted toggle, inline first-paint script (no flash), `color-scheme` set — dark is designed, not inverted
+- Scroll progress rule in the header; sticky header that condenses past 100 px
 - Once-only scroll reveals with per-row 70 ms stagger (IntersectionObserver)
-- Scroll-to-top as a real `<button>` with `aria-label`, appears past 100 px
-- Keyboard access throughout: skip link, `focus-visible` outlines, tiles as links
-- Mobile-specific composition: full-bleed 4:5 tiles, folio caption rows, hover affordances replaced with tap feedback
+- Tile choreography — image zoom (1.06), red duotone stamp (`mix-blend-mode: multiply`), press feedback (0.98 scale)
+- Fluid typographic scale via `clamp()`; mobile nav as a scrollable anchor strip with ≥44 px targets
 - Reduced-motion honored: reveals render instantly, hover zoom falls back to opacity-only cues
 - Lazy-loaded grid images (`loading="lazy"`, `decoding="async"`)
+
+### 360° viewer — static fallback
+
+A canvas-based 360° turntable was evaluated but deliberately **not** shipped: it needs 24–36 photographic frames per bike, which this free static project cannot produce honestly. The configurator's colourway preview is the static fallback — a single frame per colour, no fake pseudo-3D. If a frame set is ever captured, a canvas turntable can slot into the configurator without touching the rest of the page.
 
 ## Run locally
 
